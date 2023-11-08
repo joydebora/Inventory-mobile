@@ -4,7 +4,7 @@
 **Kelas: PBP D**
 
 # CHECKLIST TUGAS
-![App1](https://i.postimg.cc/Gt5JBdcP/Whats-App-Image-2023-09-19-at-18-11-23.jpg)
+![App1](https://i.postimg.cc/43Fs3RGb/Whats-App-Image-2023-11-08-at-09-32-11.jpg)
 ## 1. Membuat sebuah program Flutter baru dengan tema inventory seperti tugas-tugas sebelumnya.
 Buka Terminal atau Command Prompt.
 
@@ -18,10 +18,7 @@ cd <APP_NAME>
 
 Jalankan proyek melalui Terminal atau Command Prompt dengan `flutter run`
 
-## 2. Membuat tiga tombol sederhana dengan ikon dan teks untuk:
-#### Melihat daftar item (Lihat Item)
-#### Menambah item (Tambah Item)
-#### Logout (Logout)
+## 2. Membuat tiga tombol sederhana dengan ikon dan teks untuk: Melihat daftar item (Lihat Item), Menambah item (Tambah Item), Logout (Logout)
 Membuat berkas baru `menu.dart` dan mengimpor paket (package) flutter/material.dart, yang merupakan paket utama untuk mengembangkan aplikasi Flutter dengan menggunakan material design.
 ```
 import 'package:flutter/material.dart';
@@ -103,10 +100,11 @@ body: SingleChildScrollView(
 )
 ```
 
-## 3. Memunculkan Snackbar dengan tulisan:
-#### "Kamu telah menekan tombol Lihat Item" ketika tombol Lihat Item ditekan.
-#### "Kamu telah menekan tombol Tambah Item" ketika tombol Tambah Item ditekan.
-#### "Kamu telah menekan tombol Logout" ketika tombol Logout ditekan.
+## 3. Memunculkan Snackbar dengan tulisan: "Kamu telah menekan tombol Lihat Item" ketika tombol Lihat Item ditekan, "Kamu telah menekan tombol Tambah Item" ketika tombol Tambah Item ditekan, "Kamu telah menekan tombol Logout" ketika tombol Logout ditekan.
+![App2](https://i.postimg.cc/3JBRH6k9/Whats-App-Image-2023-11-08-at-09-32-53.jpg)
+![App3](https://i.postimg.cc/5tvWfYP1/Whats-App-Image-2023-11-08-at-09-32-53-1.jpg)
+![App4](https://i.postimg.cc/B6skshLc/Whats-App-Image-2023-11-08-at-09-32-53-2.jpg)
+
 Membuat kelas ShopItem untuk mendefinisikan model data untuk item-item dalam toko. Setiap ShopItem memiliki dua atribut: name (nama item) dan icon (ikon yang merepresentasikan item tersebut).
 ```
 class ShopItem {
@@ -183,19 +181,19 @@ Widget build(BuildContext context) {
 **Deskripsi**: \
 Stateless widget adalah jenis widget di Flutter yang tidak memiliki data internal yang berubah. Tampilan statis dan tidak bergantung pada perubahan data internal.
 
-**Karakteristik**: \
+**Karakteristik**: 
 - Tidak dapat berubah setelah pembuatan.
 - Mewakili bagian dari antarmuka pengguna yang tidak bergantung pada perubahan data internal.
 - Berguna untuk tampilan statis yang tidak memerlukan pembaruan berdasarkan input atau interaksi pengguna.
 
-**Contoh penggunaan** \
+**Contoh penggunaan**: \
 Menampilkan teks statis, ikon, gambar, atau komponen UI yang tidak memerlukan perubahan dinamis.
 
 #### Stateful Widget:
 **Deskripsi**: \
 Stateful widget adalah jenis widget di Flutter yang memiliki data internal yang dapat berubah. Dapat memperbarui tampilan berdasarkan perubahan data internal atau input pengguna.
 
-**Karakteristik**: \
+**Karakteristik**: 
 - Dapat memiliki data yang berubah (mutable) yang memengaruhi tampilan widget.
 - Menggunakan objek State terpisah untuk mengelola data yang dapat berubah.
 - Cocok untuk tampilan yang membutuhkan pembaruan berdasarkan input pengguna, data dinamis, atau interaksi.
