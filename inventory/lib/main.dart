@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/menu.dart';
+import 'package:inventory/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: MyHomePage()
+      
     );
   }
 }
