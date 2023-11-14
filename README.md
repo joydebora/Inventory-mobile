@@ -276,3 +276,411 @@ class ShopCard extends StatelessWidget {
   }
 }
 ```
+
+# TUGAS 8
+**Nama: Joy Debora Sitorus**\
+**NPM: 2206082991**\
+**Kelas: PBP D**
+
+# CHECKLIST TUGAS
+![App1](https://i.postimg.cc/43Fs3RGb/Whats-App-Image-2023-11-08-at-09-32-11.jpg)
+## 1. Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+- Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+- Memiliki sebuah tombol Save.
+- Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+- Setiap elemen input tidak boleh kosong.
+- Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+
+Berkas inventory_form.dart:
+```
+import 'package:flutter/material.dart';
+// Impor drawer yang sudah dibuat sebelumnya
+import 'package:inventory/widgets/left_drawer.dart';
+
+class ShopFormPage extends StatefulWidget {
+    const ShopFormPage({super.key});
+
+    @override
+    State<ShopFormPage> createState() => _ShopFormPageState();
+}
+
+class _ShopFormPageState extends State<ShopFormPage> {
+    final _formKey = GlobalKey<FormState>();
+    String _name = "";
+    int _price = 0;
+    String _description = "";
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+                title: const Center(
+                child: Text(
+                    'Form Tambah Item',
+                ),
+                ),
+                backgroundColor: Colors.indigo,
+                foregroundColor: Colors.white,
+            ),
+            // Tambahkan drawer yang sudah dibuat di sini
+            drawer: const LeftDrawer(),
+            
+            body: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                hintText: "Nama Item",
+                                labelText: "Nama Item",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                ),
+                                onChanged: (String? value) {
+                                setState(() {
+                                    _name = value!;
+                                });
+                                },
+                                validator: (String? value) {
+                                if (value == null || value.isEmpty) {
+                                    return "Nama tidak boleh kosong!";
+                                }
+                                return null;
+                                },
+                            ),
+                            ),
+
+                            Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                hintText: "Harga",
+                                labelText: "Harga",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                ),
+                                // Tambahkan variabel yang sesuai
+                                onChanged: (String? value) {
+                                setState(() {
+                                    _price = int.parse(value!);
+                                });
+                                },
+                                validator: (String? value) {
+                                if (value == null || value.isEmpty) {
+                                    return "Harga tidak boleh kosong!";
+                                }
+                                if (int.tryParse(value) == null) {
+                                    return "Harga harus berupa angka!";
+                                }
+                                return null;
+                                },
+                            ),
+                            ),
+
+                            Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                hintText: "Deskripsi",
+                                labelText: "Deskripsi",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                ),
+                                onChanged: (String? value) {
+                                setState(() {
+                                    // Tambahkan variabel yang sesuai
+                                    _description = value!;
+                                });
+                                },
+                                validator: (String? value) {
+                                if (value == null || value.isEmpty) {
+                                    return "Deskripsi tidak boleh kosong!";
+                                }
+                                return null;
+                                },
+                            ),
+                            ),
+
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+```
+
+Tombol save:
+```
+...
+Align(
+  alignment: Alignment.bottomCenter,
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all(Colors.indigo),
+      ),
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {}
+      },
+      child: const Text(
+        "Save",
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  ),
+),
+```
+
+## 2. Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
+Berkas inventory_card.dart:
+```
+import 'package:flutter/material.dart';
+import 'package:inventory/screens/inventory_form.dart';
+
+class ShopItem {
+  final String name;
+  final IconData icon;
+  final Color color; // Menambahkan properti warna
+
+  ShopItem(this.name, this.icon, this.color);
+}
+
+class ShopCard extends StatelessWidget {
+  final ShopItem item;
+
+  const ShopCard(this.item, {super.key}); // Constructor
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      child: InkWell(
+        // Area responsive terhadap sentuhan
+        onTap: () {
+          // Memunculkan SnackBar ketika diklik
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
+
+          // Navigate ke route yang sesuai (tergantung jenis tombol)
+          if (item.name == "Tambah Item") {
+            // Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ShopFormPage()));
+          }
+        },
+        child: Container(
+          // Container untuk menyimpan Icon dan Text
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+## 3. Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
+
+Berkas inventory_form.dart:
+```
+...
+Align(
+  alignment: Alignment.bottomCenter,
+  child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(Colors.indigo),
+      ),
+      onPressed: () {
+          if (_formKey.currentState!.validate()) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                  return AlertDialog(
+                      title: const Text('Item berhasil tersimpan'),
+                      content: SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                          children: [
+                          Text('Nama: $_name'),
+                          //Munculkan value-value lainnya
+                          Text('Harga: $_price'),
+                          Text('Deskripsi: $_description'),
+                          ],
+                      ),
+                      ),
+                      actions: [
+                      TextButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                          Navigator.pop(context);
+                          },
+                      ),
+                      ],
+                  );
+                  },
+              );
+              }
+          _formKey.currentState!.reset();
+      },
+      child: const Text(
+          "Save",
+          style: TextStyle(color: Colors.white),
+      ),
+      ),
+  ),
+),
+...
+```
+
+## 4. Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+-  Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
+-  Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+-  Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+
+Berkas left_drawer.dart:
+```
+import 'package:flutter/material.dart';
+import 'package:inventory/screens/menu.dart';
+// Impor halaman ShopFormPage jika sudah dibuat
+import 'package:inventory/screens/inventory_form.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+            // Bagian drawer header
+            const DrawerHeader(
+            decoration: BoxDecoration(
+                color: Colors.indigo,
+            ),
+            child: Column(
+                children: [
+                Text(
+                    'Inventory',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    ),
+                ),
+                Padding(padding: EdgeInsets.all(10)),
+                Text("Catat seluruh barang inventorymu di sini!",
+                    // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    ),
+                    ),
+                ],
+            ),
+            ),
+          // Bagian routing
+          ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Halaman Utama'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                    ));
+            },
+            ),
+            ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Item'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => ShopFormPage(),
+                    ));
+            },
+            ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+**Method push()** menambahkan suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack, sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna.
+Contoh penggunaan:
+```
+...
+    if (item.name == "Tambah Produk") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ShopFormPage()));
+    }
+...
+```
+
+**Method pushReplacement()** menghapus route yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu route. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke suatu route yang diberikan. Pada stack route yang dikelola Navigator, route lama pada atas stack akan digantikan secara langsung oleh route baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya.
+Contoh penggunaan:
+```
+...
+    onTap: () {
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyHomePage(),
+        ));
+    },
+...
+```
+
+**Perbedaan keduanya:**
+Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push() akan menambahkan route baru diatas route yang sudah ada pada atas stack, sedangkan pushReplacement() menggantikan route yang sudah ada pada atas stack dengan route baru tersebut.
+
+## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+![App1](https://i.postimg.cc/s2vF238G/sample-flutter-layout.png)
+
+## Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+
+## Bagaimana penerapan clean architecture pada aplikasi Flutter?
+
+## Bonus:  
+- Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
+
+- Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
