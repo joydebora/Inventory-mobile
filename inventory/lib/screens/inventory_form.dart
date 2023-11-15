@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // Impor drawer yang sudah dibuat sebelumnya
 import 'package:inventory/widgets/left_drawer.dart';
+import 'package:inventory/models/item.dart';
 
 class ShopFormPage extends StatefulWidget {
     const ShopFormPage({super.key});
@@ -11,9 +12,12 @@ class ShopFormPage extends StatefulWidget {
 
 class _ShopFormPageState extends State<ShopFormPage> {
     final _formKey = GlobalKey<FormState>();
-    String _name = "";
-    int _price = 0;
-    String _description = "";
+    var item = Item(
+      name: '',
+      price: 0,
+      description: '',
+  );
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -47,7 +51,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                                 ),
                                 onChanged: (String? value) {
                                 setState(() {
-                                    _name = value!;
+                                    item.name = value!;
                                 });
                                 },
                                 validator: (String? value) {
@@ -72,7 +76,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                                 // Tambahkan variabel yang sesuai
                                 onChanged: (String? value) {
                                 setState(() {
-                                    _price = int.parse(value!);
+                                    item.price = int.parse(value!);
                                 });
                                 },
                                 validator: (String? value) {
@@ -100,7 +104,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                                 onChanged: (String? value) {
                                 setState(() {
                                     // Tambahkan variabel yang sesuai
-                                    _description = value!;
+                                    item.description = value!;
                                 });
                                 },
                                 validator: (String? value) {
@@ -122,38 +126,12 @@ class _ShopFormPageState extends State<ShopFormPage> {
                                             MaterialStateProperty.all(Colors.indigo),
                                     ),
                                     onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                return AlertDialog(
-                                                    title: const Text('Item berhasil tersimpan'),
-                                                    content: SingleChildScrollView(
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                        children: [
-                                                        Text('Nama: $_name'),
-                                                        //Munculkan value-value lainnya
-                                                        Text('Harga: $_price'),
-                                                        Text('Deskripsi: $_description'),
-                                                        ],
-                                                    ),
-                                                    ),
-                                                    actions: [
-                                                    TextButton(
-                                                        child: const Text('OK'),
-                                                        onPressed: () {
-                                                        Navigator.pop(context);
-                                                        },
-                                                    ),
-                                                    ],
-                                                );
-                                                },
-                                            );
-                                            }
-                                        _formKey.currentState!.reset();
-                                    },
+                                      if (_formKey.currentState!.validate()) {
+                                          showFormData(context, item);
+                                          items.add(item);
+                                          _formKey.currentState!.reset();
+                                        }
+                                      },
                                     child: const Text(
                                         "Save",
                                         style: TextStyle(color: Colors.white),
@@ -168,4 +146,33 @@ class _ShopFormPageState extends State<ShopFormPage> {
             ),
         );
     }
+}
+
+void showFormData(BuildContext context, Item item) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Card Saved Successfully'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Card Name: ${item.name}'),
+              Text('Amount: ${item.price}'),
+              Text('Description: ${item.description}'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
 }

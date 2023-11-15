@@ -1,15 +1,54 @@
 import 'package:flutter/material.dart';
 // Impor drawer widget
+
+import 'package:inventory/models/item.dart';
+
 import 'package:inventory/widgets/left_drawer.dart';
-import 'package:inventory/widgets/inventory_card.dart';
+import 'package:inventory/widgets/menu_item.dart';
+import 'package:inventory/widgets/menu_card.dart';
+
+import 'package:inventory/screens/inventory_form.dart';
+import 'package:inventory/screens/inventory_list.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({Key? key}) : super(key: key);
     
-    final List<ShopItem> items = [
-      ShopItem("Lihat Item", Icons.checklist, Colors.orange), // Menggunakan warna oranye
-      ShopItem("Tambah Item", Icons.add_shopping_cart, Colors.indigo), // Menggunakan warna ungu
-      ShopItem("Logout", Icons.logout, Colors.blue), // Menggunakan warna biru
+    final List<MenuItem> menuItems = [
+      MenuItem(
+        title: 'Lihat Item',
+        icon: Icons.list_alt_outlined,
+        color: const Color(0xFF8A2BE2),
+        onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ItemListPage(items: items)),
+        );
+      },
+      ),
+    MenuItem(
+      title: 'Tambah Item',
+      icon: Icons.add,
+      color: const Color(0xFFFF6F61),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ShopFormPage()),
+        );
+      },
+    ),
+    MenuItem(
+      title: 'Logout',
+      icon: Icons.logout,
+      color: const Color(0xFFDC143C),
+      onTap: (BuildContext context) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(const SnackBar(
+            content: Text("Kamu telah menekan tombol Logout!"),
+            duration: Duration(seconds: 2),
+          ));
+      },
+    ),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -62,14 +101,13 @@ class MyHomePage extends StatelessWidget {
               GridView.count(
                 // Container pada card kita.
                 primary: true,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                padding: const EdgeInsets.all(20.0),
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
-                  // Iterasi untuk setiap item
-                  return ShopCard(item);
+                children: menuItems.map((item) {
+                  return MenuCard(item);
                 }).toList(),
               ),
             ],
