@@ -721,7 +721,10 @@ Contoh penggunaan:
 Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push() akan menambahkan route baru diatas route yang sudah ada pada atas stack, sedangkan pushReplacement() menggantikan route yang sudah ada pada atas stack dengan route baru tersebut.
 
 ## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+
+Widget Tree Structure:
 ![App1](https://i.postimg.cc/s2vF238G/sample-flutter-layout.png)
+
 1. `Container` adalah widget dasar untuk mengatur layout. Ini dapat menentukan ukuran, padding, margin, dan dekorasi dari elemen anaknya.\
 **Konteks Penggunaan**: Digunakan ketika Anda ingin mengatur tata letak elemen-elemen anak dengan lebih rinci, seperti menentukan ukuran atau memberikan dekorasi.
 2. `Row dan Column` adalah widget untuk menempatkan elemen-elemen anak secara horizontal (Row) atau vertikal (Column).\
