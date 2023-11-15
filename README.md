@@ -652,6 +652,7 @@ class LeftDrawer extends StatelessWidget {
 
 ## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
 **Method push()** menambahkan suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack, sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna.
+
 Contoh penggunaan:
 ```
 ...
@@ -663,6 +664,7 @@ Contoh penggunaan:
 ```
 
 **Method pushReplacement()** menghapus route yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu route. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke suatu route yang diberikan. Pada stack route yang dikelola Navigator, route lama pada atas stack akan digantikan secara langsung oleh route baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya.
+
 Contoh penggunaan:
 ```
 ...
@@ -676,15 +678,51 @@ Contoh penggunaan:
 ...
 ```
 
-**Perbedaan keduanya:**
+**Perbedaan keduanya:**\
 Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push() akan menambahkan route baru diatas route yang sudah ada pada atas stack, sedangkan pushReplacement() menggantikan route yang sudah ada pada atas stack dengan route baru tersebut.
 
 ## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
 ![App1](https://i.postimg.cc/s2vF238G/sample-flutter-layout.png)
+1. **Container**: widget dasar untuk mengatur layout. Ini dapat menentukan ukuran, padding, margin, dan dekorasi dari elemen anaknya.\
+Konteks Penggunaan: Digunakan ketika Anda ingin mengatur tata letak elemen-elemen anak dengan lebih rinci, seperti menentukan ukuran atau memberikan dekorasi.
+2. **Row dan Column**: widget untuk menempatkan elemen-elemen anak secara horizontal (Row) atau vertikal (Column).\
+Konteks Penggunaan: Digunakan untuk mengatur tata letak elemen-elemen anak secara berderet atau berkolom.
+3. **ListView**: widget untuk menampilkan daftar elemen anak secara bergulir.\
+Konteks Penggunaan: Ideal untuk menampilkan daftar panjang data, seperti daftar kontak atau pesan.
+4. **Stack**: widget yang menempatkan elemen-elemen anak di atas satu sama lain.\
+Konteks Penggunaan: Digunakan ketika Anda ingin menumpuk beberapa elemen, seperti menempatkan teks di atas gambar.
+5. **Expanded dan Flexible**: widget untuk memberikan ruang tambahan pada elemen anak di dalam Row, Column, atau Flex.\
+Konteks Penggunaan: Digunakan ketika Anda ingin memberikan proporsi ruang tambahan pada elemen anak, misalnya, dalam distribusi ruang di dalam Row atau Column.
+6. **GridView**: widget untuk menampilkan elemen anak dalam bentuk grid.\
+Konteks Penggunaan: Cocok untuk menampilkan data dalam bentuk grid, seperti galeri foto atau tampilan produk dalam aplikasi e-commerce.
+7. **Wrap**: widget yang mengatur elemen-elemen anak ke dalam baris atau kolom berdasarkan ruang yang tersedia. Jika elemen-anak melebihi lebar atau tinggi yang tersedia, mereka akan dipindahkan ke baris atau kolom berikutnya.\
+Konteks Penggunaan: Digunakan ketika terdapat sejumlah elemen yang ingin ditampilkan dalam area yang terbatas, dan kita ingin mengelola penataan otomatisnya.
+8. **Positioned**: widget yang memposisikan elemen anaknya relatif terhadap kotak yang mengandungnya.\
+Konteks Penggunaan: Cocok untuk secara eksplisit mengatur posisi suatu widget dalam suatu tata letak, misalnya, dalam tumpukan (stack) di mana kita ingin menentukan posisi elemen child.
+9. **SizedBox**: widget yang memberikan dimensi tetap pada elemen anaknya. Ini dapat digunakan untuk memberikan batasan ukuran pada widget di dalamnya.\
+Konteks Penggunaan: Berguna untuk memberikan ukuran tetap pada suatu widget, misalnya, untuk memberikan jarak atau ruang kosong.
 
 ## Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+1. `TextFormField` untuk Nama Item:\
+**Alasan Penggunaan:** TextFormField digunakan untuk mengambil input teks seperti nama item. Dekorasi dan validasi ditambahkan untuk memberikan panduan kepada pengguna dan memastikan bahwa nama item tidak boleh kosong.
+
+2. `TextFormField` untuk Harga:\
+**Alasan Penggunaan:** TextFormField juga digunakan untuk mengambil input teks, tetapi pada kasus ini, nilai yang dimasukkan diharapkan berupa angka (harga). Validasi dilakukan untuk memastikan bahwa input adalah angka.
+
+3. `TextFormField` untuk Deskripsi:\
+**Alasan Penggunaan:** Seperti elemen input sebelumnya, TextFormField digunakan untuk mengambil input teks. Deskripsi adalah data teks yang lebih panjang, dan penggunaan TextFormField memungkinkan validasi untuk memastikan deskripsi tidak boleh kosong.
+
+4. `ElevatedButton` untuk Simpan:\
+**Alasan Penggunaan:** ElevatedButton digunakan sebagai tombol "Simpan" untuk menyimpan data input. Digunakan untuk mengirimkan data ke fungsi _formKey.currentState!.validate() saat ditekan, dan jika valid, data akan ditampilkan dalam AlertDialog dan ditambahkan ke dalam daftar item.
 
 ## Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Clean Architecture adalah pendekatan desain perangkat lunak yang bertujuan untuk memisahkan konsep bisnis dari implementasi teknis dan infrastruktur. Dalam konteks Flutter atau pengembangan aplikasi mobile, implementasi Clean Architecture dapat membantu memisahkan logika bisnis dari detail implementasi seperti tata letak UI atau sumber daya luar.
+
+Contoh implementasi penerapan Clean Architecture pada aplikasi petkeeper inventory-mobile:\
+Pembagian Struktur Proyek:\
+1. **Entities (Entitas):** Tempatkan model atau kelas yang mewakili konsep bisnis dalam direktori lib/models. Contohnya, kelas Item yang digunakan untuk merepresentasikan data item.
+2. **Presenters atau UI (UI):** Tempatkan tata letak UI, widget, dan logika interface di dalam lib/screens dan lib/widgets. Hal ini bertujuan untuk memisahkan logika interface sebisa mungkin dari logika bisnis.
+3. **Main.dart:** Menerapkan file utama aplikasi yang mungkin memuat dependency injection dan membuat instansiasi objek yang dibutuhkan (seperti repository atau kasus penggunaan) di dalam lib/main.dart.
 
 ## Bonus:  
 - Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
