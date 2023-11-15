@@ -286,9 +286,9 @@ class ShopCard extends StatelessWidget {
 ![App1](https://i.postimg.cc/Yqsfb5nZ/Screenshot-1837.png)
 
 ## 1. Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
-- Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
-- Memiliki sebuah tombol Save.
-- Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.\
+Memiliki sebuah tombol Save.\
+Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
 - Setiap elemen input tidak boleh kosong.
 - Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
 
@@ -602,9 +602,10 @@ Terdapat pula tombol "OK" yang ketika ditekan akan menutup dialog menggunakan Na
 Setelah menampilkan dialog, formulir di-reset ke kondisi awal menggunakan _formKey.currentState!.reset().
 
 ## 4. Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
--  Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
--  Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
--  Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.\
+Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.\
+Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+
 ![App4](https://i.postimg.cc/d0q1d1RY/Screenshot-1838.png)
 
 Membuat berkas `left_drawer.dart` pada direktori widgets, untuk membuat drawer (menu geser) di aplikasi. Drawer ini berisi beberapa item menu, seperti "Halaman Utama" dan "Tambah Item," yang memungkinkan pengguna untuk berpindah ke halaman-halaman yang berbeda.
