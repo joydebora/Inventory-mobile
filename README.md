@@ -593,14 +593,13 @@ Align(
 ...
 ```
 Implementasi program:
-Align dan Padding digunakan untuk mengatur posisi widget anaknya, dalam hal ini, tombol "Save", ke bagian bawah tengah layar.
-ElevatedButton digunakan sebagai tombol "Save" yang akan memicu aksi saat ditekan.
-Pengecekan apakah formulir saat ini valid menggunakan _formKey.currentState!.validate():
-- Jika formulir valid, sebuah showDialog ditampilkan untuk memberi tahu pengguna bahwa item berhasil tersimpan.
-- Di dalam showDialog, sebuah AlertDialog dibuat dengan judul "Item berhasil tersimpan" dan konten berupa Column dari Text yang menampilkan nama, harga, dan deskripsi yang diisi pengguna.
-- Terdapat pula tombol "OK" yang ketika ditekan akan menutup dialog menggunakan Navigator.pop(context).
-- Setelah menampilkan dialog, formulir di-reset ke kondisi awal menggunakan _formKey.currentState!.reset().
-
+- Align dan Padding digunakan untuk mengatur posisi widget anaknya, dalam hal ini, tombol "Save", ke bagian bawah tengah layar.
+- ElevatedButton digunakan sebagai tombol "Save" yang akan memicu aksi saat ditekan.
+- Pengecekan apakah formulir saat ini valid menggunakan _formKey.currentState!.validate():\
+Jika formulir valid, sebuah showDialog ditampilkan untuk memberi tahu pengguna bahwa item berhasil tersimpan.\
+Di dalam showDialog, sebuah AlertDialog dibuat dengan judul "Item berhasil tersimpan" dan konten berupa Column dari Text yang menampilkan nama, harga, dan deskripsi yang diisi pengguna.\
+Terdapat pula tombol "OK" yang ketika ditekan akan menutup dialog menggunakan Navigator.pop(context).\
+Setelah menampilkan dialog, formulir di-reset ke kondisi awal menggunakan _formKey.currentState!.reset().
 
 ## 4. Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
 -  Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
