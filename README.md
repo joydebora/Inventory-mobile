@@ -722,7 +722,6 @@ Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push(
 
 ## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
 
-Widget Tree Structure:
 ![App1](https://i.postimg.cc/s2vF238G/sample-flutter-layout.png)
 
 1. `Container` adalah widget dasar untuk mengatur layout. Ini dapat menentukan ukuran, padding, margin, dan dekorasi dari elemen anaknya.\
