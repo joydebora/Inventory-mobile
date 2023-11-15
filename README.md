@@ -766,8 +766,7 @@ Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architectu
 Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.\
 Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
 
-![App1](https://i.postimg.cc/bJ5NK97y/Screenshot-1832.png)
-![App2](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
+![App1](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
 
 Membuat direktori models pada lib dan membuat berkas baru `item.dart` untuk merepresentasikan item dalam inventaris.
 ```
