@@ -291,11 +291,12 @@ class ShopCard extends StatelessWidget {
 - Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
 - Setiap elemen input tidak boleh kosong.
 - Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+
 ![App1](https://i.postimg.cc/0jNDCnp9/Screenshot-1827.png)
 ![App2](https://i.postimg.cc/7YfSGBHV/Screenshot-1825.png)
 ![App3](https://i.postimg.cc/G2LycKgv/Screenshot-1826.png)
 
-Berkas inventory_form.dart:
+Membuat berkas `inventory_form.dart` pada direktori screens yang mengimplementasikan formulir untuk menambahkan item ke dalam inventaris. membuat class ShopFormPage yang menggunakan StatefulWidget karena memiliki state yang berubah selama waktu (nilai _name, _price, _description).
 ```
 import 'package:flutter/material.dart';
 // Impor drawer yang sudah dibuat sebelumnya
@@ -307,7 +308,11 @@ class ShopFormPage extends StatefulWidget {
     @override
     State<ShopFormPage> createState() => _ShopFormPageState();
 }
+```
+Menerapkan metode createState() untuk membuat instance dari _ShopFormPageState.
 
+Membuat class _ShopFormPageState yang mengelola state dari ShopFormPage dan mendefinisikan tata letak dan perilaku formulir.
+```
 class _ShopFormPageState extends State<ShopFormPage> {
     final _formKey = GlobalKey<FormState>();
     String _name = "";
@@ -419,8 +424,19 @@ class _ShopFormPageState extends State<ShopFormPage> {
     }
 }
 ```
+Implementasi program:
+- Mendeklarasikan `GlobalKey<FormState>` sebagai kunci untuk mengakses dan memanipulasi status formulir.
+- Menyimpan nilai _name, _price, dan _description sebagai bagian dari state.
+- Menerapkan metode build yang menghasilkan tampilan halaman formulir.
+- Menggunakan widget AppBar sebagai bagian atas halaman.
+- Menggunakan widget LeftDrawer (drawer yang sudah dibuat sebelumnya) sebagai drawer di sebelah kiri halaman.
+- Menggunakan widget Form sebagai wadah untuk elemen formulir.
+- Menerapkan widget SingleChildScrollView dan Column untuk mengatasi masalah overflow saat keyboard muncul.
+- Menambahkan tiga buah TextFormField untuk mengambil input nama item, harga, dan deskripsi.
+- Menggunakan onChanged untuk memperbarui state setiap kali nilai input berubah.
+- Menambahkan validasi untuk masing-masing input.
 
-Tombol save:
+Membuat tombol "Save" (ElevatedButton) yang ketika ditekan akan memvalidasi formulir.
 ```
 ...
 Align(
@@ -445,7 +461,7 @@ Align(
 ```
 
 ## 2. Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
-Berkas inventory_card.dart:
+Membuat berkas `inventory_card.dart` pada direktori widgets untuk menampilkan kartu item dalam inventaris. Membuat class ShopItem untuk merepresentasikan model item dengan properti nama (name), ikon (icon), dan warna (color).
 ```
 import 'package:flutter/material.dart';
 import 'package:inventory/screens/inventory_form.dart';
@@ -457,7 +473,10 @@ class ShopItem {
 
   ShopItem(this.name, this.icon, this.color);
 }
+```
 
+Membuat class ShopCard untuk menampilkan kartu item toko dengan properti yang ditentukan oleh ShopItem.
+```
 class ShopCard extends StatelessWidget {
   final ShopItem item;
 
@@ -510,11 +529,16 @@ class ShopCard extends StatelessWidget {
   }
 }
 ```
+Implementasi program:
+- Konstruktor ShopCard menerima sebuah objek ShopItem dan memberikan key opsional.
+- Widget ini menggunakan Material sebagai latar belakang dengan warna sesuai dengan properti color dari ShopItem.
+- InkWell digunakan untuk memberikan efek respons saat kartu ditekan.
+- Pada setiap onTap, ScaffoldMessenger menampilkan SnackBar memberikan umpan balik bahwa tombol telah ditekan dan kemudian, tergantung pada jenis tombol (item.name), melakukan navigasi ke halaman formulir untuk menambahkan item baru ke dalam inventaris menggunakan Navigator.push.
 
 ## 3. Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
 ![App4](https://i.postimg.cc/1zH8Y6RX/Screenshot-1828.png)
 
-Berkas inventory_form.dart:
+Menambahkan fungsi pada berkas `inventory_form.dart` yang bertujuan untuk menangani aksi yang terkait dengan tombol "Save" di dalam formulir.
 ```
 ...
 Align(
@@ -568,6 +592,15 @@ Align(
 ),
 ...
 ```
+Implementasi program:
+Align dan Padding digunakan untuk mengatur posisi widget anaknya, dalam hal ini, tombol "Save", ke bagian bawah tengah layar.
+ElevatedButton digunakan sebagai tombol "Save" yang akan memicu aksi saat ditekan.
+Pengecekan apakah formulir saat ini valid menggunakan _formKey.currentState!.validate():
+- Jika formulir valid, sebuah showDialog ditampilkan untuk memberi tahu pengguna bahwa item berhasil tersimpan.
+- Di dalam showDialog, sebuah AlertDialog dibuat dengan judul "Item berhasil tersimpan" dan konten berupa Column dari Text yang menampilkan nama, harga, dan deskripsi yang diisi pengguna.
+- Terdapat pula tombol "OK" yang ketika ditekan akan menutup dialog menggunakan Navigator.pop(context).
+- Setelah menampilkan dialog, formulir di-reset ke kondisi awal menggunakan _formKey.currentState!.reset().
+
 
 ## 4. Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
 -  Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
@@ -575,7 +608,7 @@ Align(
 -  Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
 ![App4](https://i.postimg.cc/d0q1d1RY/Screenshot-1838.png)
 
-Berkas left_drawer.dart:
+Membuat berkas `left_drawer.dart` pada direktori widgets, untuk membuat drawer (menu geser) di aplikasi. Drawer ini berisi beberapa item menu, seperti "Halaman Utama" dan "Tambah Item," yang memungkinkan pengguna untuk berpindah ke halaman-halaman yang berbeda.
 ```
 import 'package:flutter/material.dart';
 import 'package:inventory/screens/menu.dart';
@@ -649,6 +682,12 @@ class LeftDrawer extends StatelessWidget {
   }
 }
 ```
+Implementasi program:
+- Konstruktor LeftDrawer digunakan untuk membuat instance dari drawer.
+- Menggunakan Drawer sebagai wadah utama untuk item-menu.
+- Menggunakan ListView untuk menampung daftar item-menu dengan opsi scroll jika terlalu banyak item.
+- Membuat bagian header drawer (DrawerHeader) yang memiliki tulisan "Inventory" dan deskripsi singkat tentang pencatatan barang inventory.
+- Menyertakan icon dan teks untuk opsi navigasi, seperti "Halaman Utama" dan "Tambah Item."
 
 ## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
 **Method push()** menambahkan suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack, sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna.
@@ -730,8 +769,8 @@ Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architectu
 ![App1](https://i.postimg.cc/bJ5NK97y/Screenshot-1832.png)
 ![App2](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
 
+Membuat direktori models pada lib dan membuat berkas baru `item.dart` untuk merepresentasikan item dalam inventaris.
 ```
-Membuat direktori models pada lib dan membuat berkas baru `item.dart` yang berisi:
 class Item {
   String name;
   int price;
@@ -757,8 +796,15 @@ class Item {
         'description': description,
       };
 }
+```
+Implementasi program:
+- Properti name, price, dan description digunakan untuk menyimpan informasi mengenai suatu item.
+- Konstruktor Item digunakan untuk membuat instance dari kelas Item dengan menginisialisasi nilai properti.
+- Metode fromJson digunakan sebagai factory method untuk membuat instance Item dari data yang diberikan dalam format JSON. Ini sering digunakan saat mengonversi data dari sumber eksternal, seperti respons API, menjadi objek Dart.
+- Metode toJson digunakan untuk mengonversi instance Item menjadi format JSON. Ini sering digunakan saat mengirim data dari aplikasi Flutter ke sumber eksternal, seperti API.
 
-// Temporary Data for Testing Purposes Only (Will be replaced with API)
+Membuat data sementara untuk pengujian dan pengembangan aplikasi sebelum diimplementasikan dengan data sebenarnya dari API atau sumber eksternal lainnya.
+```
 List<Item> items = [
   Item(
     name: 'Organic Cat Food',
@@ -774,7 +820,7 @@ List<Item> items = [
 ];
 ```
 
-Pada direktori screens, membuat berkas baru `inventory_detail.dart` yang berisi:
+Pada direktori screens, membuat berkas baru `inventory_detail.dart` untuk menampilkan detail suatu item dalam inventaris. 
 ```
 import 'package:flutter/material.dart';
 import 'package:inventory/models/item.dart';
@@ -844,8 +890,18 @@ class ItemDetail extends StatelessWidget {
   }
 }
 ```
+Implementasi program:
+- Konstruktor ItemDetail menerima parameter item yang merupakan instance dari kelas Item. Hal ini memungkinkan kelas ItemDetail untuk menampilkan detail dari item yang spesifik.
+- Dengan meng-extend StatelessWidget, ItemDetail digunakan untuk membuat tampilan UI yang statis (tanpa keadaan yang berubah).
+- Di dalam metode build, dibangun struktur tampilan menggunakan widget Scaffold sebagai kerangka tampilan utama.
+- AppBar digunakan sebagai bagian atas tampilan dan menampilkan judul yang sesuai dengan nama item.
+- SingleChildScrollView digunakan untuk memastikan bahwa tampilan dapat digulir jika kontennya melebihi ukuran layar.
+- Align dengan Alignment.topCenter digunakan untuk memposisikan konten ke bagian atas tengah layar.
+- Dalam Column, terdapat widget-container yang menampilkan informasi detail item seperti nama, harga, dan deskripsi.
+- Bagian ini menggunakan Container untuk styling dengan warna latar belakang, border, dan padding tertentu untuk meningkatkan estetika tampilan.
+- Setiap informasi item ditampilkan menggunakan widget Text dengan gaya tertentu (ukuran font, warna teks, dll.).
 
-Pada direktori screens, membuat berkas baru `inventory_list.dart` yang berisi:
+Pada direktori screens, membuat berkas baru `inventory_list.dart` untuk menampilkan daftar item dalam bentuk grid.
 ```
 import 'package:flutter/material.dart';
 import 'package:inventory/widgets/left_drawer.dart';
@@ -881,8 +937,17 @@ class ItemListPage extends StatelessWidget {
   }
 }
 ```
+Implementasi program:
+- Konstruktor ItemListPage menerima parameter items, yang merupakan daftar item yang akan ditampilkan.
+- Dengan meng-extend StatelessWidget, kelas ini digunakan untuk membuat tampilan UI yang statis.
+- Tampilan utama dibungkus dalam widget Scaffold, yang menyediakan kerangka kerja untuk halaman.
+- Drawer (LeftDrawer) ditambahkan ke halaman sebagai menu geser di sebelah kiri layar.
+- AppBar digunakan sebagai bagian atas tampilan dan menampilkan judul "Item List".
+- Body dari tampilan adalah GridView.builder yang digunakan untuk menampilkan daftar item dalam bentuk grid yang dapat digulir.
+- SliverGridDelegateWithFixedCrossAxisCount digunakan untuk menentukan tata letak grid dengan jumlah kolom tetap (2 kolom) dan rasio aspek child (item) sebesar 0.7.
+- Dalam GridView.builder, setiap item diambil dari daftar item menggunakan ItemCard, yang merupakan widget untuk menampilkan kartu item.
 
-Pada direktori widget, membuat berkas baru `menu_card.dart` yang berisi:
+Pada direktori widget, membuat berkas baru `menu_card.dart` untuk menampilkan kartu menu pada aplikasi. 
 ```
 import 'package:flutter/material.dart';
 import 'package:inventory/widgets/menu_item.dart';
@@ -926,8 +991,15 @@ class MenuCard extends StatelessWidget {
   }
 }
 ```
+Implementasi program:
+- Konstruktor MenuCard menerima parameter item yang merupakan instance dari kelas MenuItem. MenuItem berisi informasi tentang ikon, judul, warna latar belakang, dan fungsi yang akan dijalankan saat item ditekan.
+- Dengan meng-extend StatelessWidget, MenuCard digunakan untuk membuat tampilan UI yang statis.
+- Dalam metode build, dibangun struktur tampilan menggunakan widget Material sebagai wadah utama dengan warna latar belakang yang sesuai.
+- InkWell digunakan sebagai area yang responsif terhadap sentuhan pengguna. Ketika area ini ditekan, fungsi yang ditentukan dalam MenuItem akan dijalankan.
+- Container digunakan untuk menata elemen-elemen dalam kartu dengan memberikan padding.
+- Di dalam Container, terdapat Column yang berisi Icon dan Text. Icon menampilkan ikon menu, dan Text menampilkan judul menu.
 
-Pada direktori widget, membuat berkas baru `menu_item.dart` yang berisi:
+Pada direktori widget, membuat berkas baru `menu_item.dart` untuk merepresentasikan satu item pada menu dalam aplikasi Flutter.
 ```
 import 'package:flutter/material.dart';
 
@@ -945,6 +1017,14 @@ class MenuItem {
   });
 }
 ```
+Implementasi program:
+- Kelas MenuItem memiliki empat properti:\
+title: Menyimpan judul atau label dari item menu.\
+icon: Menyimpan ikon yang akan ditampilkan untuk item menu.\
+color: Menyimpan warna latar belakang dari kartu menu yang sesuai dengan item.\
+onTap: Menyimpan fungsi yang akan dijalankan saat item menu ditekan. Fungsi ini menerima parameter BuildContext untuk memungkinkan navigasi atau interaksi dengan elemen UI lainnya.
+- Kelas ini menggunakan parameter bertipe required pada semua propertinya, sehingga saat membuat instance dari MenuItem, semua properti harus diberikan.
+- Properti-properti ini digunakan untuk mengkonfigurasi dan membangun tampilan kartu menu yang sesuai.
 
 Modifikasi class `_ShopFormPageState` pada berkas inventory_form.dart didalam direktori screens menjadi:
 

@@ -24,7 +24,7 @@ class Item {
       };
 }
 
-// Temporary Data for Testing Purposes Only (Will be replaced with API)
+// Temporary Data
 List<Item> items = [
   Item(
     name: 'Organic Cat Food',
