@@ -720,7 +720,7 @@ Clean Architecture adalah pendekatan desain perangkat lunak yang bertujuan untuk
 
 Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architecture pada aplikasi petkeeper inventory-mobile:
 1. **Entities (Entitas):** Menempatkan model atau kelas yang mewakili konsep bisnis dalam direktori lib/models. Contohnya, kelas Item yang digunakan untuk merepresentasikan data item.
-2. **Presenters atau UI (UI):** Menempatkan tata letak UI, widget, dan logika interface di dalam lib/screens dan lib/widgets. Hal ini bertujuan untuk memisahkan logika interface sebisa mungkin dari logika bisnis.
+2. **Interface atau UI:** Menempatkan tata letak UI, widget, dan logika interface di dalam lib/screens dan lib/widgets. Hal ini bertujuan untuk memisahkan logika interface sebisa mungkin dari logika bisnis.
 3. **Main.dart:** Menerapkan file utama aplikasi yang mungkin memuat dependency injection dan membuat instansiasi objek yang dibutuhkan (seperti repository atau kasus penggunaan) di dalam lib/main.dart.
 
 ## Bonus:  
@@ -729,3 +729,291 @@ Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architectu
 
 ![App1](https://i.postimg.cc/bJ5NK97y/Screenshot-1832.png)
 ![App2](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
+
+```
+Membuat direktori models pada lib dan membuat berkas baru `item.dart` yang berisi:
+class Item {
+  String name;
+  int price;
+  String description;
+
+  Item({
+    required this.name,
+    required this.price,
+    required this.description,
+  });
+
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      name: json['name'],
+      price: json['price'],
+      description: json['description'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'price': price,
+        'description': description,
+      };
+}
+
+// Temporary Data for Testing Purposes Only (Will be replaced with API)
+List<Item> items = [
+  Item(
+    name: 'Organic Cat Food',
+    price: 150000,
+    description:
+        'Premium organic cat food with real chicken',
+  ),
+  Item(
+    name: 'Cat Litter Box',
+    price: 300000,
+    description: 'Large, easy-to-clean litter box for cat',
+  ),
+];
+```
+
+Pada direktori screens, membuat berkas baru `inventory_detail.dart` yang berisi:
+```
+import 'package:flutter/material.dart';
+import 'package:inventory/models/item.dart';
+
+class ItemDetail extends StatelessWidget {
+  final Item item;
+
+  const ItemDetail({Key? key, required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(item.name),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Column(
+            children: [
+              const Padding(padding: EdgeInsets.all(8)),
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00071f),
+                  border: Border.all(color: const Color(0xFF1D3E67)),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Name: ${item.name}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "Price: ${item.price}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "Description: ${item.description}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Pada direktori screens, membuat berkas baru `inventory_list.dart` yang berisi:
+```
+import 'package:flutter/material.dart';
+import 'package:inventory/widgets/left_drawer.dart';
+import 'package:inventory/models/item.dart';
+import 'package:inventory/widgets/inventory_card.dart';
+
+class ItemListPage extends StatelessWidget {
+  final List<Item> items;
+
+  const ItemListPage({Key? key, required this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: const LeftDrawer(),
+      appBar: AppBar(
+        title: const Text('Item List'),
+      ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: items.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        itemBuilder: (context, index) {
+          return ItemCard(items[index]);
+        },
+      ),
+    );
+  }
+}
+```
+
+Pada direktori widget, membuat berkas baru `menu_card.dart` yang berisi:
+```
+import 'package:flutter/material.dart';
+import 'package:inventory/widgets/menu_item.dart';
+
+class MenuCard extends StatelessWidget {
+  final MenuItem item;
+
+  const MenuCard(this.item, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      child: InkWell(
+        onTap: () {
+          item.onTap(context);
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Pada direktori widget, membuat berkas baru `menu_item.dart` yang berisi:
+```
+import 'package:flutter/material.dart';
+
+class MenuItem {
+  final String title;
+  final IconData icon;
+  final Color color;
+  final Function(BuildContext context) onTap;
+
+  MenuItem({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+}
+```
+
+Modifikasi class `_ShopFormPageState` pada berkas inventory_form.dart didalam direktori screens menjadi:
+
+```            
+body: Form(
+    key: _formKey,
+    child: SingleChildScrollView(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.indigo),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                          showFormData(context, item);
+                          items.add(item);
+                          _formKey.currentState!.reset();
+                        }
+                      },
+                    child: const Text(
+                        "Save",
+                        style: TextStyle(color: Colors.white),
+                    ),
+                    ),
+                ),
+            ),
+        ],
+    ),
+  ),
+)
+```
+
+Menambahkan method `showFormData` pada berkas inventory_form.dart:
+```
+...
+void showFormData(BuildContext context, Item item) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Card Saved Successfully'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Card Name: ${item.name}'),
+              Text('Amount: ${item.price}'),
+              Text('Description: ${item.description}'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+```
