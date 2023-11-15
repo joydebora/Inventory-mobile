@@ -763,8 +763,8 @@ Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architectu
 3. **Main.dart:** Menerapkan file utama aplikasi yang mungkin memuat dependency injection dan membuat instansiasi objek yang dibutuhkan (seperti repository atau kasus penggunaan) di dalam lib/main.dart.
 
 ## Bonus:  
-- Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
-- Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
+Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.\
+Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
 
 ![App1](https://i.postimg.cc/bJ5NK97y/Screenshot-1832.png)
 ![App2](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
@@ -1026,7 +1026,7 @@ onTap: Menyimpan fungsi yang akan dijalankan saat item menu ditekan. Fungsi ini 
 - Kelas ini menggunakan parameter bertipe required pada semua propertinya, sehingga saat membuat instance dari MenuItem, semua properti harus diberikan.
 - Properti-properti ini digunakan untuk mengkonfigurasi dan membangun tampilan kartu menu yang sesuai.
 
-Modifikasi class `_ShopFormPageState` pada berkas inventory_form.dart didalam direktori screens menjadi:
+Modifikasi class `_ShopFormPageState` pada berkas inventory_form.dart didalam direktori screens untuk menampilkan dialog yang berisi informasi dari item yang telah diisi oleh pengguna.
 
 ```            
 body: Form(
@@ -1064,8 +1064,14 @@ body: Form(
   ),
 )
 ```
+Implementasi program:
+- Program membangun antarmuka pengguna untuk formulir yang memungkinkan pengguna mengisi informasi item.
+- Ketika tombol "Save" ditekan, dilakukan pengecekan validasi formulir (_formKey.currentState!.validate()).
+- Jika formulir valid, fungsi showFormData(context, item) dipanggil untuk menampilkan dialog yang berisi informasi item yang telah diisi.
+- Setelah itu, item baru (item) ditambahkan ke dalam daftar items.
+- Terakhir, formulir di-reset ke keadaan awal menggunakan _formKey.currentState!.reset().
 
-Menambahkan method `showFormData` pada berkas inventory_form.dart:
+Menambahkan method `showFormData` pada berkas inventory_form.dart untuk menampilkan dialog yang berisi informasi dari item yang telah diisi oleh pengguna.
 ```
 ...
 void showFormData(BuildContext context, Item item) {
@@ -1097,3 +1103,5 @@ void showFormData(BuildContext context, Item item) {
   );
 }
 ```
+Ketika dipanggil, fungsi ini membuka AlertDialog yang berisi informasi seperti nama item, harga, dan deskripsi.\
+Dialog ini memiliki tombol "Close" yang, ketika ditekan, akan menutup dialog.
