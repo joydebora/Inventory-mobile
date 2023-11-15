@@ -283,13 +283,17 @@ class ShopCard extends StatelessWidget {
 **Kelas: PBP D**
 
 # CHECKLIST TUGAS
-![App1](https://i.postimg.cc/43Fs3RGb/Whats-App-Image-2023-11-08-at-09-32-11.jpg)
+![App1](https://i.postimg.cc/Yqsfb5nZ/Screenshot-1837.png)
+
 ## 1. Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
 - Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
 - Memiliki sebuah tombol Save.
 - Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
 - Setiap elemen input tidak boleh kosong.
 - Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+![App1](https://i.postimg.cc/0jNDCnp9/Screenshot-1827.png)
+![App2](https://i.postimg.cc/7YfSGBHV/Screenshot-1825.png)
+![App3](https://i.postimg.cc/G2LycKgv/Screenshot-1826.png)
 
 Berkas inventory_form.dart:
 ```
@@ -508,6 +512,7 @@ class ShopCard extends StatelessWidget {
 ```
 
 ## 3. Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
+![App4](https://i.postimg.cc/1zH8Y6RX/Screenshot-1828.png)
 
 Berkas inventory_form.dart:
 ```
@@ -568,6 +573,7 @@ Align(
 -  Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
 -  Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
 -  Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+![App4](https://i.postimg.cc/d0q1d1RY/Screenshot-1838.png)
 
 Berkas left_drawer.dart:
 ```
@@ -682,5 +688,7 @@ Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push(
 
 ## Bonus:  
 - Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
-
 - Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
+
+![App1](https://i.postimg.cc/bJ5NK97y/Screenshot-1832.png)
+![App2](https://i.postimg.cc/SQXWjTNG/Screenshot-1831.png)
