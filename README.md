@@ -683,24 +683,24 @@ Terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push(
 
 ## Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
 ![App1](https://i.postimg.cc/s2vF238G/sample-flutter-layout.png)
-1. **Container**: widget dasar untuk mengatur layout. Ini dapat menentukan ukuran, padding, margin, dan dekorasi dari elemen anaknya.\
-Konteks Penggunaan: Digunakan ketika Anda ingin mengatur tata letak elemen-elemen anak dengan lebih rinci, seperti menentukan ukuran atau memberikan dekorasi.
-2. **Row dan Column**: widget untuk menempatkan elemen-elemen anak secara horizontal (Row) atau vertikal (Column).\
-Konteks Penggunaan: Digunakan untuk mengatur tata letak elemen-elemen anak secara berderet atau berkolom.
-3. **ListView**: widget untuk menampilkan daftar elemen anak secara bergulir.\
-Konteks Penggunaan: Ideal untuk menampilkan daftar panjang data, seperti daftar kontak atau pesan.
-4. **Stack**: widget yang menempatkan elemen-elemen anak di atas satu sama lain.\
-Konteks Penggunaan: Digunakan ketika Anda ingin menumpuk beberapa elemen, seperti menempatkan teks di atas gambar.
-5. **Expanded dan Flexible**: widget untuk memberikan ruang tambahan pada elemen anak di dalam Row, Column, atau Flex.\
-Konteks Penggunaan: Digunakan ketika Anda ingin memberikan proporsi ruang tambahan pada elemen anak, misalnya, dalam distribusi ruang di dalam Row atau Column.
-6. **GridView**: widget untuk menampilkan elemen anak dalam bentuk grid.\
-Konteks Penggunaan: Cocok untuk menampilkan data dalam bentuk grid, seperti galeri foto atau tampilan produk dalam aplikasi e-commerce.
-7. **Wrap**: widget yang mengatur elemen-elemen anak ke dalam baris atau kolom berdasarkan ruang yang tersedia. Jika elemen-anak melebihi lebar atau tinggi yang tersedia, mereka akan dipindahkan ke baris atau kolom berikutnya.\
-Konteks Penggunaan: Digunakan ketika terdapat sejumlah elemen yang ingin ditampilkan dalam area yang terbatas, dan kita ingin mengelola penataan otomatisnya.
-8. **Positioned**: widget yang memposisikan elemen anaknya relatif terhadap kotak yang mengandungnya.\
-Konteks Penggunaan: Cocok untuk secara eksplisit mengatur posisi suatu widget dalam suatu tata letak, misalnya, dalam tumpukan (stack) di mana kita ingin menentukan posisi elemen child.
-9. **SizedBox**: widget yang memberikan dimensi tetap pada elemen anaknya. Ini dapat digunakan untuk memberikan batasan ukuran pada widget di dalamnya.\
-Konteks Penggunaan: Berguna untuk memberikan ukuran tetap pada suatu widget, misalnya, untuk memberikan jarak atau ruang kosong.
+1. `Container` adalah widget dasar untuk mengatur layout. Ini dapat menentukan ukuran, padding, margin, dan dekorasi dari elemen anaknya.\
+**Konteks Penggunaan**: Digunakan ketika Anda ingin mengatur tata letak elemen-elemen anak dengan lebih rinci, seperti menentukan ukuran atau memberikan dekorasi.
+2. `Row dan Column` adalah widget untuk menempatkan elemen-elemen anak secara horizontal (Row) atau vertikal (Column).\
+**Konteks Penggunaan**: Digunakan untuk mengatur tata letak elemen-elemen anak secara berderet atau berkolom.
+3. `ListView` adalah widget untuk menampilkan daftar elemen anak secara bergulir.\
+**Konteks Penggunaan**: Ideal untuk menampilkan daftar panjang data, seperti daftar kontak atau pesan.
+4. `Stack` adalah widget yang menempatkan elemen-elemen anak di atas satu sama lain.\
+**Konteks Penggunaan**: Digunakan ketika Anda ingin menumpuk beberapa elemen, seperti menempatkan teks di atas gambar.
+5. `Expanded dan Flexible` adalah widget untuk memberikan ruang tambahan pada elemen anak di dalam Row, Column, atau Flex.\
+**Konteks Penggunaan**: Digunakan ketika Anda ingin memberikan proporsi ruang tambahan pada elemen anak, misalnya, dalam distribusi ruang di dalam Row atau Column.
+6. `GridView` adalah widget untuk menampilkan elemen anak dalam bentuk grid.\
+**Konteks Penggunaan**: Cocok untuk menampilkan data dalam bentuk grid, seperti galeri foto atau tampilan produk dalam aplikasi e-commerce.
+7. `Wrap` adalah widget yang mengatur elemen-elemen anak ke dalam baris atau kolom berdasarkan ruang yang tersedia. Jika elemen-anak melebihi lebar atau tinggi yang tersedia, mereka akan dipindahkan ke baris atau kolom berikutnya.\
+**Konteks Penggunaan**: Digunakan ketika terdapat sejumlah elemen yang ingin ditampilkan dalam area yang terbatas, dan kita ingin mengelola penataan otomatisnya.
+8. `Positioned` adalah widget yang memposisikan elemen anaknya relatif terhadap kotak yang mengandungnya.\
+**Konteks Penggunaan**: Cocok untuk secara eksplisit mengatur posisi suatu widget dalam suatu tata letak, misalnya, dalam tumpukan (stack) di mana kita ingin menentukan posisi elemen child.
+9. `SizedBox` adalah widget yang memberikan dimensi tetap pada elemen anaknya. Ini dapat digunakan untuk memberikan batasan ukuran pada widget di dalamnya.\
+**Konteks Penggunaan**: Berguna untuk memberikan ukuran tetap pada suatu widget, misalnya, untuk memberikan jarak atau ruang kosong.
 
 ## Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
 1. `TextFormField` untuk Nama Item:\
@@ -718,10 +718,9 @@ Konteks Penggunaan: Berguna untuk memberikan ukuran tetap pada suatu widget, mis
 ## Bagaimana penerapan clean architecture pada aplikasi Flutter?
 Clean Architecture adalah pendekatan desain perangkat lunak yang bertujuan untuk memisahkan konsep bisnis dari implementasi teknis dan infrastruktur. Dalam konteks Flutter atau pengembangan aplikasi mobile, implementasi Clean Architecture dapat membantu memisahkan logika bisnis dari detail implementasi seperti tata letak UI atau sumber daya luar.
 
-Contoh implementasi penerapan Clean Architecture pada aplikasi petkeeper inventory-mobile:\
-Pembagian Struktur Proyek:\
-1. **Entities (Entitas):** Tempatkan model atau kelas yang mewakili konsep bisnis dalam direktori lib/models. Contohnya, kelas Item yang digunakan untuk merepresentasikan data item.
-2. **Presenters atau UI (UI):** Tempatkan tata letak UI, widget, dan logika interface di dalam lib/screens dan lib/widgets. Hal ini bertujuan untuk memisahkan logika interface sebisa mungkin dari logika bisnis.
+Contoh implementasi pembagian struktur proyek sebagai penerapan Clean Architecture pada aplikasi petkeeper inventory-mobile:
+1. **Entities (Entitas):** Menempatkan model atau kelas yang mewakili konsep bisnis dalam direktori lib/models. Contohnya, kelas Item yang digunakan untuk merepresentasikan data item.
+2. **Presenters atau UI (UI):** Menempatkan tata letak UI, widget, dan logika interface di dalam lib/screens dan lib/widgets. Hal ini bertujuan untuk memisahkan logika interface sebisa mungkin dari logika bisnis.
 3. **Main.dart:** Menerapkan file utama aplikasi yang mungkin memuat dependency injection dan membuat instansiasi objek yang dibutuhkan (seperti repository atau kasus penggunaan) di dalam lib/main.dart.
 
 ## Bonus:  
