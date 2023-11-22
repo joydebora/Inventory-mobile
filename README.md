@@ -1114,7 +1114,10 @@ Dialog ini memiliki tombol "Close" yang, ketika ditekan, akan menutup dialog.
 
 # CHECKLIST TUGAS
 ## 1. Membuat halaman login pada proyek tugas Flutter.
-Membuat django-app bernama authentication pada project Django yang telah kamu buat sebelumnya.
+Membuat django-app bernama authentication pada project Django yang telah dibuat sebelumnya dengan menjalankan:
+```
+python manage.py startapp authentication
+```
 
 Menambahkan authentication ke INSTALLED_APPS pada main project settings.py aplikasi Django.
 
@@ -1285,7 +1288,7 @@ class _LoginPageState extends State<LoginPage> {
                                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                                 // gunakan URL http://10.0.2.2/
-                                final response = await request.login("http://<APP_URL_KAMU>/auth/login/", {
+                                final response = await request.login("http://127.0.0.1:8000/auth/login/", {
                                 'username': username,
                                 'password': password,
                                 });
@@ -1595,4 +1598,4 @@ Selanjutnya, Flutter menavigasi pengguna ke layar menu atau mengaktifkan fitur-f
 ## Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.Widget	Fungsi
 **Widget:** ItemCard. Fungsi: Menampilkan data item dalam bentuk card.\
 **Widget:** MenuCard. Fungsi: Menampilkan menu dalam bentuk card.\
-**Widget:** LeftDrawer. Fungsi: Menampilkan drawer berisi menu.\]
+**Widget:** LeftDrawer. Fungsi: Menampilkan drawer berisi menu.
