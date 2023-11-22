@@ -1577,22 +1577,22 @@ Dengan data yang telah di-decode dan dimapping, kita dapat menampilkan informasi
 
 ## Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
 Proses autentikasi dari input data akun pada Flutter ke Django hingga tampilnya menu pada Flutter dapat dijelaskan dalam beberapa langkah:
-1. **Mengambil Data Username dan Password:**\ 
+1. **Mengambil Data Username dan Password:**\
 Pengguna memasukkan data username dan password melalui antarmuka pengguna di aplikasi Flutter.
-2. **Melakukan Request ke Server:**\ 
+2. **Melakukan Request ke Server:**\
 Dengan menggunakan CookieRequest atau metode lainnya, Flutter melakukan permintaan (request) ke server Django dengan mengirimkan data login, yaitu username dan password.
 3. **Proses Autentikasi oleh Django:**\
 Django menerima permintaan login dan melakukan proses autentikasi dengan memeriksa data username dan password yang diterima.
 Jika autentikasi berhasil, Django menghasilkan respons yang mencakup informasi pengguna (misalnya, username) dan memberikan token atau cookie sebagai tanda bahwa pengguna berhasil diotentikasi.
-4. **Menerima Response dari Server:**\ 
+4. **Menerima Response dari Server:**\
 Flutter menerima respons dari server Django dalam format JSON yang berisi pesan (misalnya, konfirmasi login berhasil) dan informasi pengguna (seperti username).
-5. **Menyimpan Cookie pada Shared Preferences:**\ 
+5. **Menyimpan Cookie pada Shared Preferences:**\
 Setelah menerima respons, Flutter menyimpan cookie atau token yang diterima dari server ke dalam Shared Preferences. Ini memungkinkan Flutter untuk menyimpan informasi autentikasi dan menggunakannya untuk permintaan berikutnya.
-6. **Menampilkan Pesan dan Menu pada Aplikasi Flutter:**\ 
+6. **Menampilkan Pesan dan Menu pada Aplikasi Flutter:**\
 Flutter menanggapi respons dari server dengan menampilkan pesan yang diterima (misalnya, pesan sukses login) kepada pengguna.\
 Selanjutnya, Flutter menavigasi pengguna ke layar menu atau mengaktifkan fitur-fitur tertentu dalam aplikasi yang hanya dapat diakses setelah autentikasi berhasil.
 
 ## Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.Widget	Fungsi
 **Widget:** ItemCard. Fungsi: Menampilkan data item dalam bentuk card.\
 **Widget:** MenuCard. Fungsi: Menampilkan menu dalam bentuk card.\
-**Widget:** LeftDrawer. Fungsi: Menampilkan drawer berisi menu.\
+**Widget:** LeftDrawer. Fungsi: Menampilkan drawer berisi menu.\]
