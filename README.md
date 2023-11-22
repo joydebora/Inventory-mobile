@@ -1119,13 +1119,16 @@ Membuat django-app bernama authentication pada project Django yang telah dibuat 
 python manage.py startapp authentication
 ```
 
-Menambahkan authentication ke INSTALLED_APPS pada main project settings.py aplikasi Django.
+Menambahkan `authentication` ke INSTALLED_APPS pada main project settings.py aplikasi Django.
 
-Menjalankan perintah pip install django-cors-headers untuk menginstal library yang dibutuhkan.
+Menjalankan perintah untuk menginstal library yang dibutuhkan:
+```
+pip install django-cors-headers
+```
 
-Menambahkan corsheaders ke INSTALLED_APPS pada main project settings.py aplikasi Django.
+Menambahkan `corsheaders` ke INSTALLED_APPS pada main project settings.py aplikasi Django.
 
-Menambahkan corsheaders.middleware.CorsMiddleware ke MIDDLEWARE pada main project settings.py aplikasi Django.
+Menambahkan `corsheaders.middleware.CorsMiddleware` ke MIDDLEWARE pada main project settings.py aplikasi Django.
 
 Menambahkan beberapa variabel berikut ini pada main project settings.py aplikasi Django.
 ```
