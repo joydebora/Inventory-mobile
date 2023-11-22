@@ -1543,7 +1543,7 @@ else if (item.name == "Lihat Produk") {
       }
 ...
 ```
-Mengimpor path file yang dibutuhkan saat menambahkan ProductPage ke left_drawer.dart dan shop_card.dart.
+Mengimpor path file yang dibutuhkan saat menambahkan ProductPage ke `left_drawer.dart` dan `shop_card.dart`
 
 ## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
 Ya, kita dapat melakukan pengambilan data JSON tanpa membuat model terlebih dahulu. Ini sering disebut sebagai "parsing JSON secara dinamis" atau "dynamic JSON parsing". Sebagai contoh, jika kita bekerja dengan bahasa pemrograman yang mendukung tipe data dinamis atau memiliki fitur parsing JSON dinamis, seperti JavaScript atau Python, kita dapat langsung mengurai data JSON tanpa membuat struktur data atau model terlebih dahulu.
