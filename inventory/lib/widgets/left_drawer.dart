@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:inventory/screens/list_product.dart';
 import 'package:inventory/screens/menu.dart';
 // Impor halaman ShopFormPage jika sudah dibuat
 import 'package:inventory/screens/inventory_form.dart';
+
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -19,7 +21,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
                 children: [
                 Text(
-                    'Inventory',
+                    'Shopping List',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                     fontSize: 30,
@@ -28,7 +30,7 @@ class LeftDrawer extends StatelessWidget {
                     ),
                 ),
                 Padding(padding: EdgeInsets.all(10)),
-                Text("Catat seluruh barang inventorymu di sini!",
+                Text("Catat seluruh keperluan belanjamu di sini!",
                     // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -54,15 +56,26 @@ class LeftDrawer extends StatelessWidget {
             ),
             ListTile(
             leading: const Icon(Icons.add_shopping_cart),
-            title: const Text('Tambah Item'),
+            title: const Text('Tambah Produk'),
             // Bagian redirection ke ShopFormPage
             onTap: () {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                    builder: (context) => ShopFormPage(),
+                    builder: (context) => const ShopFormPage(),
                     ));
             },
+            ),
+            ListTile(
+              leading: const Icon(Icons.shopping_basket),
+              title: const Text('Daftar Produk'),
+              onTap: () {
+                // Route menu ke halaman produk
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+                );
+              },
             ),
         ],
       ),
